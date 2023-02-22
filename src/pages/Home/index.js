@@ -22,9 +22,11 @@ export default function Home() {
           />
         </HorizontalScroll>
       </Collection>
+
       <a
         className={styles.signIn}
-        href="https://github.com/login/oauth/authorize?client_id=2fd7a075b391b262d9e5&redirect_uri=http://localhost:8080/api/auth"
+        // delete this and set up api request
+        href="https://github.com/login/oauth/authorize?client_id=ca1bf5075d1ff773466b&redirect_uri=http://localhost:8080/api/auth"
       >
         Sign in
       </a>

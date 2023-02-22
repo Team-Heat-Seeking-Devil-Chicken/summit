@@ -1,31 +1,34 @@
 //router boilerplate
 const express = require('express');
-const router = express.Router();
-const app = express();
-
+const goalRouter = express.Router();
 const taskRouter = require('./taskRouter');
+const app = express();
 app.use('/goal/task', taskRouter);
 
 const goalController = require('../controllers/goalController');
 
-router.get('/goal', goalController.getAllGoals, (req, res, next) => {
+goalRouter.get('/allGoals', goalController.getAllGoals, (req, res, next) => {
   res.status(200).json(res.locals.allGoals);
   next();
 });
 
-router.post('/goal', goalController.createGoal, (req, res, next) => {
+// has user authentication
+goalRouter.get('/goal', goalController.getUserGoals, (req, res, next) => {
+  res.status(200).json(res.locals.userGoals);
+  next();
+});
+
+goalRouter.post('/goal', goalController.createGoal, (req, res, next) => {
   res.status(200).json(res.locals.newGoal);
   next();
 });
 
-router.patch('/goal/:id', goalController.updateGoal, (req, res, next) => {
-  res.status(200).json(res.locals.updatedGoal);
-  next();
+goalRouter.patch('/goal/:id', goalController.updateGoal, (req, res) => {
+  return res.status(200).json(res.locals.updatedGoal);
 });
 
-router.delete('/goal/:id', goalController.deleteGoal, (req, res, next) => {
-  res.status(200).json(res.locals.deletedGoal);
-  next();
+goalRouter.delete('/goal/:id', goalController.deleteGoal, (req, res) => {
+  return res.sendStatus(200);
 });
 
-module.exports = router;
+module.exports = goalRouter;
