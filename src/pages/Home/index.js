@@ -26,7 +26,7 @@ export default function Home() {
       <a
         className={styles.signIn}
         // delete this and set up api request
-        href="https://github.com/login/oauth/authorize?client_id=ca1bf5075d1ff773466b&redirect_uri=http://localhost:8080/api/auth"
+        href={`https://github.com/login/oauth/authorize?client_id=ca1bf5075d1ff773466b&redirect_uri=http://localhost:8080/api/auth`}
       >
         Sign in
       </a>

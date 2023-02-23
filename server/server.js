@@ -9,8 +9,6 @@ const crypto = require('crypto');
 const goalRouter = require('./routers/goalRouter');
 const authRouter = require('./routers/authRouter');
 
-const CLIENT_ID = 'ca1bf5075d1ff773466b';
-const CLIENT_SECRET = '5a25384f8e973c828f8ec25c3d9190c9e660d55e';
 const GITHUB_URL = 'https://github.com/login/oauth/access_token';
 
 const sessions = new Map();

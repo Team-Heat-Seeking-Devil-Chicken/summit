@@ -1,8 +1,6 @@
 const express = require('express');
 const prisma = require('/Users/thuyhoang/repos/Codesmith/projects/summit/server/server.js');
 
-const CLIENT_ID = 'ca1bf5075d1ff773466b';
-const CLIENT_SECRET = '5a25384f8e973c828f8ec25c3d9190c9e660d55e';
 const GITHUB_URL = 'https://github.com/login/oauth/access_token';
 
 const sessions = new Map();
@@ -23,7 +21,7 @@ const createErr = (errInfo) => {
 
 const authController = {
   getGithub: async (req, res, next) => {
-    const authlink = `${GITHUB_URL}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${req.query.code}`;
+    const authlink = `${GITHUB_URL}?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&code=${req.query.code}`;
     // fetching to the Github auth link for the user data.
     const response = await fetch(authlink, {
       method: 'POST',
