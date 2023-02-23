@@ -78,6 +78,24 @@ const goalController = {
     }
   },
 
+  createGoals: async (req, res, next) => {
+    try {
+      // destructure whatever is necessary from req.body for new path creation.
+      const { title, name } = req.body;
+      // create new path object here according to DB Schema.
+      const newGoal = await prisma.goal.create({
+        data: { title: title, userId: Number(userId) }
+      });
+      res.locals.newGoal = newGoal;
+      next();
+    } catch (err) {
+      // if DB error, catch that error and return to global error handler.
+      return next(
+        createErr({ method: 'createGoal', type: 'creating goal', err })
+      );
+    }
+  },
+
   updateGoal: async (req, res, next) => {
     try {
       let { cardID } = req.params;
