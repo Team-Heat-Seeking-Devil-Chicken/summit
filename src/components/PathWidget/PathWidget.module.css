@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Gloock&family=Outfit:wght@700&family=Space+Mono:wght@700&display=swap');
+
+
 :root {
   --shadow-color: 0deg 0% 23%;
   --shadow-elevation-low: 0.1px 0.3px 0.4px hsl(var(--shadow-color) / 0.34),
@@ -17,6 +19,7 @@
     8px 23.1px 27.5px -2.1px hsl(var(--shadow-color) / 0.34),
     11.8px 34.1px 40.6px -2.5px hsl(var(--shadow-color) / 0.34);
 }
+
 .wrapper h4 {
   font-size: 0.8rem;
   text-align: center;
@@ -30,6 +33,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .wrapper {
   border-radius: 10px;
   padding: 10px;
@@ -51,10 +55,31 @@
   padding-top: 2px;
   flex-grow: 1;
 }
+
 .progressBar {
   justify-self: flex-end;
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+input[type="text"] {
+  background: transparent;
+  border: solid;
+  border-radius: 8px;
+}
+
+button {
+  background-color: hsl(44, 47%, 90%);
+  font-size: 15px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.edit-btn {
+  font-size: 10px;
 }

@@ -22,7 +22,12 @@ module.exports = {
         secure: false
       }
     },
-    historyApiFallback: true
+    historyApiFallback: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*',
+      'Access-Control-Allow-Methods': '*'
+    }
   },
   module: {
     rules: [
