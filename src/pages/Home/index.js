@@ -9,6 +9,23 @@ import axios from 'axios';
 //axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
 
 export default function Home() {
+  const config = {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Credentials': true,
+      'Content-Type': 'authorization'
+    }
+  };
+
+  // function handleLogin() {
+  //   // const id = process.env.REACT_APP_CLIENT_ID;
+  //   // console.log(id);
+  //   window.location.replace(
+  //     'http://github.com/login/oauth/authorize?client_id=ca1bf5075d1ff773466b&redirect_uri=http://localhost:8080/api/auth/login/'
+  //   );
+  // }
   return (
     <main>
       <h2 className={styles.heading}>Your Spires</h2>
@@ -27,6 +44,9 @@ export default function Home() {
       <a
         className={styles.signIn}
         // delete this and set up api request
+        href={
+          'http://github.com/login/oauth/authorize?client_id=ca1bf5075d1ff773466b&redirect_uri=http://localhost:8080/api/auth/login/'
+        }
         // href={
         //   'http://github.com/login/oauth/authorize?client_id=ca1bf5075d1ff773466b&redirect_uri=http://localhost:8080/api/auth/login/'
         // // }

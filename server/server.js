@@ -11,6 +11,7 @@ require('dotenv').config();
 
 const goalRouter = require('./routers/goalRouter');
 // const authRouter = require('./routers/authRouter');
+const userRouter = require('./routers/userRouter');
 const taskRouter = require('./routers/taskRouter');
 
 // const GITHUB_URL = 'https://github.com/login/oauth/access_token';
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use(cors({ origin: true, credentials: true }));
 
 // app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
 app.use('/api', goalRouter);
 app.use('/api/task', taskRouter);
 
