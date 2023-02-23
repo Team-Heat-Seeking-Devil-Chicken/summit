@@ -7,21 +7,36 @@ goalRouter.get('/allGoals', goalController.getAllGoals, (req, res, next) => {
   return res.status(200).json(res.locals.allGoals);
 });
 
-goalRouter.post('/goal', goalController.createGoal, (req, res, next) => {
-  return res.status(200).json(res.locals.newGoal);
-});
+goalRouter.get(
+  '/goal/:userID',
+  goalController.getUserGoals,
+  (req, res, next) => {
+    return res.status(200).json(res.locals.userGoals);
+  }
+);
 
-goalRouter.patch('/goal/:id', goalController.updateGoal, (req, res, next) => {
-  return res.status(200).json(res.locals.updatedGoal);
-});
+goalRouter.post(
+  '/goal/:userID',
+  goalController.createGoal,
+  (req, res, next) => {
+    return res.status(200).json(res.locals.newGoal);
+  }
+);
 
-goalRouter.delete('/goal/:id', goalController.deleteGoal, (req, res, next) => {
-  return res.status(200).json(res.locals.deletedGoal);
-});
+goalRouter.patch(
+  '/goal/:cardID',
+  goalController.updateGoal,
+  (req, res, next) => {
+    return res.status(200).json(res.locals.updatedGoal);
+  }
+);
+
+goalRouter.delete(
+  '/goal/:cardID',
+  goalController.deleteGoal,
+  (req, res, next) => {
+    return res.status(200).json(res.locals.deletedGoal);
+  }
+);
 
 module.exports = goalRouter;
-
-// Error: unathorized
-// goalRouter.get('/goal', goalController.getUserGoals, (req, res, next) => {
-//   return res.status(200).json(res.locals.userGoals);
-// });
