@@ -1,5 +1,5 @@
 const express = require('express');
-const prisma = require('/Users/thuyhoang/repos/Codesmith/projects/summit/server/server.js');
+const prisma = require('../db.js');
 // error handling
 const createErr = (errInfo) => {
   const { method, type, err } = errInfo;

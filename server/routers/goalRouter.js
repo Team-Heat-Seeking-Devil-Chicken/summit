@@ -7,28 +7,27 @@ app.use('/goal/task', taskRouter);
 
 const goalController = require('../controllers/goalController');
 
+// Works
 goalRouter.get('/allGoals', goalController.getAllGoals, (req, res, next) => {
-  res.status(200).json(res.locals.allGoals);
-  next();
+  return res.status(200).json(res.locals.allGoals);
 });
 
-// has user authentication
+// Error: unathorized
 goalRouter.get('/goal', goalController.getUserGoals, (req, res, next) => {
-  res.status(200).json(res.locals.userGoals);
-  next();
+  return res.status(200).json(res.locals.userGoals);
 });
 
+//Works
 goalRouter.post('/goal', goalController.createGoal, (req, res, next) => {
-  res.status(200).json(res.locals.newGoal);
-  next();
+  return res.status(200).json(res.locals.newGoal);
 });
 
-goalRouter.patch('/goal/:id', goalController.updateGoal, (req, res) => {
+goalRouter.patch('/goal/:id', goalController.updateGoal, (req, res, next) => {
   return res.status(200).json(res.locals.updatedGoal);
 });
 
-goalRouter.delete('/goal/:id', goalController.deleteGoal, (req, res) => {
-  return res.sendStatus(200);
+goalRouter.delete('/goal/:id', goalController.deleteGoal, (req, res, next) => {
+  return res.status(200).json(res.locals.deletedGoal);
 });
 
 module.exports = goalRouter;

@@ -1,5 +1,5 @@
 const express = require('express');
-const prisma = require('/Users/thuyhoang/repos/Codesmith/projects/summit/server/server.js');
+const prisma = require('../db.js');
 
 const GITHUB_URL = 'https://github.com/login/oauth/access_token';
 
@@ -20,6 +20,19 @@ const createErr = (errInfo) => {
 };
 
 const authController = {
+  getAllUsers: async (req, res, next) => {
+    try {
+      console.log('hello');
+      const allUsers = await prisma.user.findMany({});
+      res.locals.allUsers = allUsers;
+      return next();
+    } catch (err) {
+      // if DB error, catch that error and return to global error handler.
+      return next(
+        createErr({ method: 'getAllUsers', type: 'getting all users', err })
+      );
+    }
+  },
   getGithub: async (req, res, next) => {
     const authlink = `${GITHUB_URL}?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&code=${req.query.code}`;
     // fetching to the Github auth link for the user data.

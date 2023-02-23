@@ -1,5 +1,5 @@
 const express = require('express');
-const prisma = require('/Users/thuyhoang/repos/Codesmith/projects/summit/server/server.js');
+const prisma = require('../db.js');
 
 const sessions = new Map();
 
@@ -50,8 +50,8 @@ const goalController = {
 
   getAllGoals: async (req, res, next) => {
     try {
-      const allGoals = await prisma.post.findMany({
-        where: { title: true }
+      const allGoals = await prisma.goal.findMany({
+        // where: { title: true }
       });
       res.locals.allGoals = allGoals;
       return next();
@@ -83,18 +83,26 @@ const goalController = {
 
   updateGoal: async (req, res, next) => {
     try {
-      const { id } = req.params;
+      let { id } = req.params;
+      const NumberId = Number(id);
+      console.log(`params is ${JSON.stringify(req.params)}`);
       // destructure whatever is needed from the req.body to update the path;
       const { title } = req.body;
+      const updatedTitle = title;
+      console.log(updatedTitle);
+      console.log(`body is ${JSON.stringify(req.body)}`);
+      // const date = new Date();
+      // console.log(date);
       const updatedGoal = await prisma.goal.update({
-        where: { id },
+        where: { id: NumberId },
         data: {
-          title: title,
-          updatedAt: now()
+          id: id,
+          userId: userId,
+          title: updatedTitle
         }
       });
       // update existing goal in the DB, the goal id will be passed in the request params (URL);
-      res.locals.updatedGoal = res.json(updatedGoal);
+      res.locals.updatedGoal = updatedGoal;
       return next();
     } catch (err) {
       return next(
@@ -105,13 +113,14 @@ const goalController = {
 
   deleteGoal: async (req, res, next) => {
     try {
-      const { id } = req.params;
+      let { id } = req.params;
+      const NumberId = Number(id);
       const deletedGoal = await prisma.goal.delete({
         where: {
-          id
+          id: NumberId
         }
       });
-      res.json(user);
+      res.locals.deletedGoal = deletedGoal;
       return next();
     } catch (err) {
       return next(
