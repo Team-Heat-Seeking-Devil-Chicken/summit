@@ -26,7 +26,6 @@ export default function Home() {
   //     'http://github.com/login/oauth/authorize?client_id=ca1bf5075d1ff773466b&redirect_uri=http://localhost:8080/api/auth/login/'
   //   );
   // }
-
   return (
     <main>
       <h2 className={styles.heading}>Your Spires</h2>
@@ -48,6 +47,9 @@ export default function Home() {
         href={
           'http://github.com/login/oauth/authorize?client_id=ca1bf5075d1ff773466b&redirect_uri=http://localhost:8080/api/auth/login/'
         }
+        // href={
+        //   'http://github.com/login/oauth/authorize?client_id=ca1bf5075d1ff773466b&redirect_uri=http://localhost:8080/api/auth/login/'
+        // // }
         // onClick={(e) => {
         //   e.preventDefault();
 
@@ -60,3 +62,24 @@ export default function Home() {
     </main>
   );
 }
+
+// const config = {
+//   headers: {
+//     'Access-Control-Allow-Origin': '*',
+//     'Access-Control-Allow-Headers': '*',
+//     'Access-Control-Allow-Methods': '*',
+//     'Access-Control-Allow-Credentials': true,
+//     'Content-Type': 'authorization'
+//   }
+// };
+// function handleLogin() {
+//   // const id = process.env.REACT_APP_CLIENT_ID;
+//   // console.log(id);
+
+//   axios
+//     .get(
+//       '//github.com/login/oauth/authorize?client_id=ca1bf5075d1ff773466b&redirect_uri=http://localhost:8080/api/auth/login/',
+//       config
+//     )
+//     .catch((err) => console.log(err));
+// }
