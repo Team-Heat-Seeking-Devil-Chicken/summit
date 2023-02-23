@@ -16,10 +16,7 @@ export default function Home() {
             complete={Math.random()}
           />
           <PathWidget title={'Get a passport'} complete={Math.random()} />
-          <PathWidget
-            title={'Join a bowling league'}
-            complete={Math.random()}
-          />
+          <PathWidget />
         </HorizontalScroll>
       </Collection>
       <a
