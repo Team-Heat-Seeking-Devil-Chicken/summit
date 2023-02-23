@@ -43,6 +43,7 @@ const authController = {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
     res.header('Access-Control-Allow-Methods', '*');
+    res.header('Content-Type', 'application/json');
     //res.sendStatus(200);
     res.redirect(githubLink);
   },

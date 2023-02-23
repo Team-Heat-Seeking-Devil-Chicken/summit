@@ -6,6 +6,8 @@ const app = express();
 const port = 3000;
 const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
+require('dotenv').config();
+// console.log(process.env);
 
 const goalRouter = require('./routers/goalRouter');
 const authRouter = require('./routers/authRouter');

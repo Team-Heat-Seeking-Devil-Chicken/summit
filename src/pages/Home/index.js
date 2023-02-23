@@ -3,22 +3,30 @@ import { Link } from 'react-router-dom';
 import { PathWidget, HorizontalScroll, Collection } from '../../components';
 import styles from './Home.module.css';
 import axios from 'axios';
-
+// const dotenv = require('dotenv');
+// dotenv.config({ path: '.env' });
+// const process = require('process');
 //axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
 
 export default function Home() {
   const config = {
     headers: {
-      // 'Access-Control-Allow-Origin': '*',
-      // 'Access-Control-Allow-Headers': '*',
-      // 'Access-Control-Allow-Methods': '*',
-      // 'Access-Control-Allow-Credentials': true
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Credentials': true,
       'Content-Type': 'authorization'
     }
   };
   function handleLogin() {
+    // const id = process.env.REACT_APP_CLIENT_ID;
+    // console.log(id);
+
     axios
-      .get('/api/auth/login/github/', config)
+      .get(
+        '//github.com/login/oauth/authorize?client_id=ca1bf5075d1ff773466b&redirect_uri=http://localhost:8080/api/auth/login/',
+        config
+      )
       .catch((err) => console.log(err));
   }
 
@@ -40,6 +48,9 @@ export default function Home() {
       <a
         className={styles.signIn}
         // delete this and set up api request
+        // href={
+        //   'http://github.com/login/oauth/authorize?client_id=ca1bf5075d1ff773466b&redirect_uri=http://localhost:8080/api/auth/login/'
+        // }
         onClick={(e) => {
           e.preventDefault();
 
