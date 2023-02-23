@@ -4,9 +4,22 @@ import { PathWidget, HorizontalScroll, Collection } from '../../components';
 import styles from './Home.module.css';
 import axios from 'axios';
 
+//axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
+
 export default function Home() {
+  const config = {
+    headers: {
+      // 'Access-Control-Allow-Origin': '*',
+      // 'Access-Control-Allow-Headers': '*',
+      // 'Access-Control-Allow-Methods': '*',
+      // 'Access-Control-Allow-Credentials': true
+      'Content-Type': 'authorization'
+    }
+  };
   function handleLogin() {
-    axios.get('/api/auth/login');
+    axios
+      .get('/api/auth/login/github/', config)
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -24,21 +37,15 @@ export default function Home() {
           <PathWidget />
         </HorizontalScroll>
       </Collection>
-      <button
-        onClick={() => {
-          handleLogin();
-        }}
-      >
-        Log-in
-      </button>
       <a
         className={styles.signIn}
         // delete this and set up api request
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
+
           console.log('log in initiated');
           handleLogin();
         }}
-        // href={`https://github.com/login/oauth/authorize?client_id=ca1bf5075d1ff773466b&redirect_uri=http://localhost:8080/api/auth`}
       >
         Sign in
       </a>

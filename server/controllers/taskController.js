@@ -17,7 +17,7 @@ const createErr = (errInfo) => {
 const taskController = {
   getUserTasks: async (req, res, next) => {
     try {
-      const userTasks = await prisma.post.findMany({
+      const userTasks = await prisma.task.findMany({
         where: { title: true }
       });
       res.locals.userTasks = userTasks;
@@ -34,7 +34,7 @@ const taskController = {
       // destructure whatever is necessary from req.body for new path creation.
       const { title } = req.body;
       // create new path object here according to DB Schema.
-      const newTask = await prisma.goal.create({
+      const newTask = await prisma.task.create({
         data: { title: title }
       });
       res.locals.newTask = newTask;
@@ -51,7 +51,7 @@ const taskController = {
       const { id } = req.params;
       // destructure whatever is needed from the req.body to update the path;
       const { tasks } = req.body;
-      const updatedTask = await prisma.goal.update({
+      const updatedTask = await prisma.task.update({
         where: { id },
         data: {
           updatedAt: now(),
@@ -70,10 +70,8 @@ const taskController = {
   deleteTask: async (req, res, next) => {
     try {
       const { id } = req.params;
-      const deletedTask = await prisma.goal.delete({
-        where: {
-          id
-        }
+      const deletedTask = await prisma.task.delete({
+        where: { id }
       });
       res.locals.deletedTask = deletedTask;
       return next();

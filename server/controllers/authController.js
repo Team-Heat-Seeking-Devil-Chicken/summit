@@ -1,5 +1,6 @@
 const express = require('express');
 const prisma = require('../db.js');
+const cors = require('cors');
 
 const GITHUB_URL = 'https://github.com/login/oauth/access_token';
 
@@ -33,18 +34,41 @@ const authController = {
       );
     }
   },
+  goToGithub: async (req, res, next) => {
+    //console.log('headers: ', req);
+    console.log(`goToGithub was hit`);
+    const githubLink = `https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=http://localhost:8080/api/auth/login/`;
+    res.header('origin', true);
+    res.header('credentials', true);
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+    res.header('Access-Control-Allow-Methods', '*');
+    //res.sendStatus(200);
+    res.redirect(githubLink);
+  },
   getGithub: async (req, res, next) => {
+    console.log(`getGithub was hit`);
     const authlink = `${GITHUB_URL}?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&code=${req.query.code}`;
     // fetching to the Github auth link for the user data.
+    console.log(`authlink is ${authlink}`);
     const response = await fetch(authlink, {
       method: 'POST',
       headers: {
-        accept: 'application/JSON'
+        accept: 'application/json',
+        content_type: 'application/x-www-form-url-encoded',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Methods': '*'
       }
     });
+    console.log(`response is ${JSON.stringify(response)}`);
     // parsing Github account data
     const json = await response.json();
-    if (json.error) res.redirect('/?error=' + json.error);
+    console.log('json: ', JSON.stringify(json));
+    if (json.error) {
+      console.log('redirecting');
+      res.redirect('/?error=' + json.error);
+    }
     // fetch the Github access token.
     res.locals.token = json.access_token;
     const gitResponse = await fetch(`https://api.github.com/user`, {

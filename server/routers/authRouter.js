@@ -10,18 +10,24 @@ authRouter.get('/allUsers', authController.getAllUsers, (req, res, next) => {
   res.status(200).json(res.locals.allUsers);
 });
 
+authRouter.get('/login/github', authController.goToGithub);
+
+// async (req, res) => {
+//   res.redirect('/login');
+// }
+
 authRouter.get(
   '/login',
   authController.getGithub,
   authController.getUser,
   authController.createSession,
   async (req, res) => {
-    res.redirect('/userGoals');
+    res.redirect('/Profile');
   }
 );
 
 authRouter.get('/signup', authController.createUser, async (req, res) => {
-  res.redirect('/userGoals');
+  res.redirect('/Profile');
 });
 
 module.exports = authRouter;

@@ -1,6 +1,7 @@
 //Express boilerplate
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const port = 3000;
 const cookieParser = require('cookie-parser');
@@ -16,7 +17,10 @@ const sessions = new Map();
 //Serve the static files from the React app
 app.use('/build', express.static(path.join(__dirname, 'client/build')));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use(cors({ origin: true, credentials: true }));
 
 app.use('/api/auth', authRouter);
 app.use('/api', goalRouter);
