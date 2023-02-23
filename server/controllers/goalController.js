@@ -85,20 +85,12 @@ const goalController = {
     try {
       let { id } = req.params;
       const NumberId = Number(id);
-      console.log(`params is ${JSON.stringify(req.params)}`);
       // destructure whatever is needed from the req.body to update the path;
       const { title } = req.body;
-      const updatedTitle = title;
-      console.log(updatedTitle);
-      console.log(`body is ${JSON.stringify(req.body)}`);
-      // const date = new Date();
-      // console.log(date);
       const updatedGoal = await prisma.goal.update({
         where: { id: NumberId },
         data: {
-          id: id,
-          userId: userId,
-          title: updatedTitle
+          title: title
         }
       });
       // update existing goal in the DB, the goal id will be passed in the request params (URL);
