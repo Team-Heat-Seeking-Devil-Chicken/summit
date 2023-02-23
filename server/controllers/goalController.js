@@ -1,7 +1,7 @@
 const express = require('express');
 const prisma = require('../db.js');
 
-const sessions = new Map();
+// const sessions = new Map();
 
 // error handling
 const createErr = (errInfo) => {
@@ -18,36 +18,6 @@ const createErr = (errInfo) => {
 };
 
 const goalController = {
-  // get an individual goal and all associated data.
-  getUserGoals: async (req, res, next) => {
-    try {
-      // Check if session is valid and associated with user
-      const session = sessions.get(req.cookies.session);
-      const userId = req.query.user_id;
-      console.log({ session, userId });
-      if (!session) {
-        res.status(401).send('Unauthorized');
-        return;
-      }
-      if (session.userId !== Number(userId)) {
-        res.status(403).send('Forbidden');
-        return;
-      }
-      const userGoals = await prisma.goal.findMany({
-        where: {
-          userId: Number(session.userId)
-        }
-      });
-      res.locals.userGoals = userGoals;
-      return next();
-    } catch (err) {
-      // if DB error, catch that error and return to global error handler.
-      return next(
-        createErr({ method: 'getUserGoals', type: 'getting iser goals', err })
-      );
-    }
-  },
-
   getAllGoals: async (req, res, next) => {
     try {
       const allGoals = await prisma.goal.findMany({
@@ -123,3 +93,33 @@ const goalController = {
 };
 
 module.exports = goalController;
+
+// get an individual goal and all associated data.
+// getUserGoals: async (req, res, next) => {
+//   try {
+//     // Check if session is valid and associated with user
+//     const session = sessions.get(req.cookies.session);
+//     const userId = req.query.user_id;
+//     console.log({ session, userId });
+//     if (!session) {
+//       res.status(401).send('Unauthorized');
+//       return;
+//     }
+//     if (session.userId !== Number(userId)) {
+//       res.status(403).send('Forbidden');
+//       return;
+//     }
+//     const userGoals = await prisma.goal.findMany({
+//       where: {
+//         userId: Number(session.userId)
+//       }
+//     });
+//     res.locals.userGoals = userGoals;
+//     return next();
+//   } catch (err) {
+//     // if DB error, catch that error and return to global error handler.
+//     return next(
+//       createErr({ method: 'getUserGoals', type: 'getting iser goals', err })
+//     );
+//   }
+// },

@@ -10,11 +10,12 @@ require('dotenv').config();
 // console.log(process.env);
 
 const goalRouter = require('./routers/goalRouter');
-const authRouter = require('./routers/authRouter');
+// const authRouter = require('./routers/authRouter');
+const taskRouter = require('./routers/taskRouter');
 
-const GITHUB_URL = 'https://github.com/login/oauth/access_token';
+// const GITHUB_URL = 'https://github.com/login/oauth/access_token';
 
-const sessions = new Map();
+// const sessions = new Map();
 
 //Serve the static files from the React app
 app.use('/build', express.static(path.join(__dirname, 'client/build')));
@@ -24,8 +25,9 @@ app.use(cookieParser());
 
 app.use(cors({ origin: true, credentials: true }));
 
-app.use('/api/auth', authRouter);
+// app.use('/api/auth', authRouter);
 app.use('/api', goalRouter);
+app.use('/api/task', taskRouter);
 
 //Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
