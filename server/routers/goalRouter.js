@@ -1,31 +1,33 @@
 //router boilerplate
 const express = require('express');
-const router = express.Router();
-const app = express();
-
+const goalRouter = express.Router();
 const taskRouter = require('./taskRouter');
+const app = express();
 app.use('/goal/task', taskRouter);
 
 const goalController = require('../controllers/goalController');
 
-router.get('/goal', goalController.getAllGoals, (req, res, next) => {
-  res.status(200).json(res.locals.allGoals);
-  next();
+// Works
+goalRouter.get('/allGoals', goalController.getAllGoals, (req, res, next) => {
+  return res.status(200).json(res.locals.allGoals);
 });
 
-router.post('/goal', goalController.createGoal, (req, res, next) => {
-  res.status(200).json(res.locals.newGoal);
-  next();
+// Error: unathorized
+goalRouter.get('/goal', goalController.getUserGoals, (req, res, next) => {
+  return res.status(200).json(res.locals.userGoals);
 });
 
-router.patch('/goal/:id', goalController.updateGoal, (req, res, next) => {
-  res.status(200).json(res.locals.updatedGoal);
-  next();
+//Works
+goalRouter.post('/goal', goalController.createGoal, (req, res, next) => {
+  return res.status(200).json(res.locals.newGoal);
 });
 
-router.delete('/goal/:id', goalController.deleteGoal, (req, res, next) => {
-  res.status(200).json(res.locals.deletedGoal);
-  next();
+goalRouter.patch('/goal/:id', goalController.updateGoal, (req, res, next) => {
+  return res.status(200).json(res.locals.updatedGoal);
 });
 
-module.exports = router;
+goalRouter.delete('/goal/:id', goalController.deleteGoal, (req, res, next) => {
+  return res.status(200).json(res.locals.deletedGoal);
+});
+
+module.exports = goalRouter;

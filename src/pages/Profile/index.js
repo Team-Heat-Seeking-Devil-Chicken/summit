@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { HorizontalScroll, PathWidget, Collection } from '../../components';
 
 export default function Profile() {
-  const [boulders, setBoulders] = useState([1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+  const [boulders, setBoulders] = useState([1, 1, 1, 1, 1, 1, 1]);
   //API CALL
 
   return (
