@@ -11,7 +11,7 @@ userRouter.post('/addUser', userController.createUser, (req, res, next) => {
 });
 
 userRouter.post('/addUsers', userController.createUsers, (req, res, next) => {
-  return res.status(200).json(res.locals.newUser);
+  return res.status(200);
 });
 
 module.exports = userRouter;

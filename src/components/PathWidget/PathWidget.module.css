@@ -25,6 +25,7 @@
   text-align: center;
   color: hsl(46, 15%, 17%);
   text-shadow: 0 0 1px hsl(45, 66%, 87%);
+
 }
 
 .heading {
@@ -38,7 +39,7 @@
   border-radius: 10px;
   padding: 10px;
   aspect-ratio: 0.8/1;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,6 +49,9 @@
   font-family: 'Outfit';
   font-weight: 700;
   padding: 10px;
+  width: 200px;
+  height: 230px;
+  margin: 20px;
 }
 
 .content {
