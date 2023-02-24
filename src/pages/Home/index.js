@@ -54,7 +54,7 @@ export default function Home() {
       // fetch username for userId
       // let userResponse = await fetch('api/users/getUsers');
       // let names = await response.json();
-      // console.log(names);
+      // console.log(name)
 
       // organize spires by users
       const spiresOrganized = {};
